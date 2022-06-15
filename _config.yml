@@ -1,16 +1,16 @@
 title:              Samandar Yokubov
 email:              samandaryokubov2000@gmail.com
-description:        Personal blog & tutorials
+description:        Personal blog
 author:             Samandar Yokubov
 baseurl:            ""
 url:                "https://samandaryokubov.github.io"
 
 # Social Profiles
 twitter_username:  
-github_username:    
+github_username: SamandarYokubov
 facebook_username:  
-instagram_username:  
-linkedin_username:
+instagram_username: 
+linkedin_username: samandar-yokubov-4580341b6
 
 # Add your google-analytics ID here to activate google analytics
 google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code

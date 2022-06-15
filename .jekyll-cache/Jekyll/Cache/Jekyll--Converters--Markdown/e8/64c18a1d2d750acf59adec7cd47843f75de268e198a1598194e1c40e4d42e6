@@ -1,0 +1,160 @@
+I"e7<h2 id="example-of-using-image_dataset_analysis-to-analyze-image-dataset">Example of using image_dataset_analysis to analyze image dataset</h2>
+
+<h3 id="first-of-all-lets-import-imagedataset-which-is-the-main-class-representing-essential-information-about-dataset-along-with-useful-tools-to-discover-it">First of all, let’s import <strong>ImageDataset</strong>, which is the main class, representing essential information about dataset along with useful tools to discover it.</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">image_dataset_analysis</span> <span class="kn">import</span> <span class="n">ImageDataset</span>
+</code></pre></div></div>
+
+<h4 id="create-an-instance-of-this-class-by-passing-image-datasets-directory-path-as-an-argument-after-running-the-cell-below-it-will-automatically-analyze-the-content-of-the-given-dataset">Create an instance of this class by passing image dataset’s directory path as an argument. After running the cell below, it will automatically analyze the content of the given dataset.</h4>
+
+<h4 id="the-following-structure-of-dataset-directory-is-required-to-successfully-analyze-it">The following structure of dataset directory is required to successfully analyze it:</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>image_dataset:
+    - class 1:
+        - image 1;
+        - image 2;
+         ....
+    - class 2
+    - class 3
+      .....
+</code></pre></div></div>
+
+<h4 id="note-the-lfw-labelled-faces-in-the-wild-face-dataset-is-utilized-in-this-example"><strong>Note</strong>: The LFW (Labelled Faces in the Wild) face dataset is utilized in this example.</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lfw</span> <span class="o">=</span> <span class="n">ImageDataset</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">Samandar</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">lfw_aligned_128</span><span class="se">\\</span><span class="s">lfw_aligned_128"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Analyzing dataset's content... 
+
+
+100%|██████████| 5734/5734 [01:09&lt;00:00, 82.73it/s] 
+</code></pre></div></div>
+
+<h4 id="get-formats-of-images-in-dataset">Get formats of images in dataset</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">formats_info</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">images_formats</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">formats_info</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Formats of images in dataset:
+	JPEG: 13213 (100.0%)
+</code></pre></div></div>
+
+<h4 id="get-modes-of-images-in-dataset">Get modes of images in dataset</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">modes_info</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">images_modes</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">modes_info</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Modes of images in dataset:
+	RGB: 13213 (100.0%)
+</code></pre></div></div>
+
+<h4 id="get-sizes-of-images-in-dataset">Get sizes of images in dataset</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sizes_info</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">images_sizes</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sizes_info</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sizes of images in dataset:
+	(128, 128): 13213 (100.0%)
+</code></pre></div></div>
+
+<h4 id="get-maximum-number-of-images-per-class">Get maximum number of images per class</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">max_value</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">max_images_per_class</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Maximum number of images per class: </span><span class="si">{</span><span class="n">max_value</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Maximum number of images per class: 530
+</code></pre></div></div>
+
+<h4 id="get-minimum-number-of-images-per-class">Get minimum number of images per class</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">min_value</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">min_images_per_class</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Minimum number of images per class: </span><span class="si">{</span><span class="n">min_value</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Minimum number of images per class: 1
+</code></pre></div></div>
+
+<h4 id="get-mean-number-of-images-per-class">Get mean number of images per class</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mean_value</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">mean_images_per_class</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Mean number of images per class: </span><span class="si">{</span><span class="n">mean_value</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mean number of images per class: 2
+</code></pre></div></div>
+
+<h4 id="get-class-info-with-name-for-instance-ben_curtis">Get class info with name, for instance, “Ben_Curtis”</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">class_info</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">get_class_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Ben_Curtis'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">class_info</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'images_number': 3, 'images': ['Ben_Curtis_0001.jpg', 'Ben_Curtis_0002.jpg', 'Ben_Curtis_0003.jpg']}
+</code></pre></div></div>
+
+<h4 id="get-classes-with-number-of-images-equal-to-n">Get classes with number of images equal to n</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">classes_with_n_images</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">get_classes_with_n_images</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">530</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">classes_with_n_images</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['George_W_Bush']
+</code></pre></div></div>
+
+<h4 id="it-might-be-interesting-to-analyze-the-proportion-of-classes-with-specified-amounts-of-images-in-the-given-dataset-the-following-method-provides-with-the-innformation-about-the-quantity-of-the-aforementioned-type-of-classes-and-plots-a-pie-chart-of-proportions-to-visualize-relations">It might be interesting to analyze the proportion of classes with specified amount(s) of images in the given dataset. The following method provides with the innformation about the quantity of the aforementioned type of classes and plots a pie chart of proportions to visualize relations.</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lfw</span><span class="p">.</span><span class="n">proportion_of_classes_with_n_images</span><span class="p">(</span><span class="n">images_number</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">plot_pie_chart</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number of classes with only 1 images : 4057
+Number of classes with only 2 images : 777
+Number of classes with only 3 images : 290
+Remaining number of classes : 610
+</code></pre></div></div>
+
+<p><img src="\img\posts\lfw_analysis\output_22_1.png" alt="png" /></p>
+
+<h4 id="method-to-perform-basic-analysis">Method to perform basic analysis.</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lfw</span><span class="p">.</span><span class="n">analyze</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number of images in image dataset: 13214
+Number of classes in image dataset: 5734
+Mean number of images per class: 2
+Minimum number of images per class: 1
+Maximum number of images per class: 530
+Formats of images in dataset:
+	jpg: 13213 (100.0%)
+Number of classes with only 1 images : 4057
+Number of classes with only 2 images : 777
+Number of classes with only 3 images : 290
+Remaining number of classes : 610
+</code></pre></div></div>
+
+<p><img src="\img\posts\lfw_analysis\output_24_1.png" alt="png" /></p>
+
+<h4 id="in-imagedataset-class-beyond-the-methods-of-analysis-there-is-a-method-which-might-be-useful-to-split-the-dataset-into-train--test-parts-and-save-them-into-text-files-given-as-parameters-in-the-following-format">In ImageDataset class, beyond the methods of analysis, there is a method, which might be useful to split the dataset into train &amp; test parts and save them into text files, given as parameters, in the following format:</h4>
+<h4 id="class_nameimage_name-label">‘class_name/image_name’ label</h4>
+<h4 id="the-n-parameter-is-utilized-to-define-the-number-of-test-images-in-a-certain-class-using-the-following-formula--number-of-images-in-class--n--where--means-whole-part">The n parameter is utilized to define the number of test images in a certain class using the following formula: [ number of images in class / n ], where [] means whole part.</h4>
+<h4 id="example-n--3-a-certain-class-contains-following-image1-image2-image3-image4-image5-image6-image7-the-number-of-images-in-class-equal-to-7--number-of-images-in-class--n----73---2-consequently-test-images-image1-image2--train-images-image3-image4-image5-image6-image7">Example: n = 3, a certain class contains following: image1, image2, image3, image4, image5, image6, image7. The number of images in class equal to 7, [ number of images in class / n ] = [ 7/3 ] = 2. Consequently, test images: image1, image2 &amp; train images: image3, image4, image5, image6, image7.</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">full</span> <span class="o">=</span> <span class="n">lfw</span><span class="p">.</span><span class="n">create_train_test_list</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                                               <span class="n">train_list_file_path</span><span class="o">=</span><span class="s">"lfw_train.txt"</span><span class="p">,</span> 
+                                               <span class="n">test_list_file_path</span><span class="o">=</span><span class="s">"lfw_test.txt"</span><span class="p">,</span>
+                                               <span class="n">full_list_file_path</span><span class="o">=</span><span class="s">"lfw_full.txt"</span><span class="p">,</span>
+                                               <span class="n">plot_relation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number of classes: 900
+Number of train images: 5297
+Number of test images: 2306
+Total number of images: 7603
+</code></pre></div></div>
+
+<p><img src="\img\posts\lfw_analysis\output_26_1.svg" alt="svg" /></p>
+
+:ET
